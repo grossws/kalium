@@ -16,7 +16,7 @@ install:
   - cmd: msbuild C:\libsodium\libsodium.vcxproj /property:Configuration=ReleaseDLL /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: SET PATH=C:\libsodium\Build\ReleaseDLL\Win32;%PATH%
 build_script:
-  - mvn clean install -q --batch-mode -DargLine=-Dfile.encoding=UTF-8
+  - mvn clean install -q --batch-mode -DargLine=-Dfile.encoding=windows-1251
 cache:
   - C:\libsodium
   - C:\Users\appveyor\.m2

@@ -25,9 +25,13 @@ import static org.abstractj.kalium.encoders.Encoder.HEX;
 import static org.abstractj.kalium.fixture.TestVectors.SHA256_DIGEST;
 import static org.abstractj.kalium.fixture.TestVectors.SHA256_DIGEST_EMPTY_STRING;
 import static org.abstractj.kalium.fixture.TestVectors.SHA256_MESSAGE;
+import static org.abstractj.kalium.fixture.TestVectors.SHA256_UNICODE_MESSAGE;
+import static org.abstractj.kalium.fixture.TestVectors.SHA256_UNICODE_DIGEST;
 import static org.abstractj.kalium.fixture.TestVectors.SHA512_DIGEST;
 import static org.abstractj.kalium.fixture.TestVectors.SHA512_DIGEST_EMPTY_STRING;
 import static org.abstractj.kalium.fixture.TestVectors.SHA512_MESSAGE;
+import static org.abstractj.kalium.fixture.TestVectors.SHA512_UNICODE_MESSAGE;
+import static org.abstractj.kalium.fixture.TestVectors.SHA512_UNICODE_DIGEST;
 import static org.abstractj.kalium.fixture.TestVectors.Blake2_MESSAGE;
 import static org.abstractj.kalium.fixture.TestVectors.Blake2_DIGEST;
 import static org.abstractj.kalium.fixture.TestVectors.Blake2_DIGEST_EMPTY_STRING;
@@ -69,6 +73,12 @@ public class HashTest {
     }
 
     @Test
+    public void testSha256UtfString() {
+        String result = hash.sha256(SHA256_UNICODE_MESSAGE, HEX);
+        assertEquals("Hash is invalid", SHA256_UNICODE_DIGEST, result);
+    }
+
+    @Test
     public void testSha256NullByte() {
         try {
             hash.sha256("\0".getBytes());
@@ -100,6 +110,12 @@ public class HashTest {
     public void testSha512EmptyHexString() throws Exception {
         String result = hash.sha512("", HEX);
         assertEquals("Hash is invalid", SHA512_DIGEST_EMPTY_STRING, result);
+    }
+
+    @Test
+    public void testSha512UtfString() {
+        String result = hash.sha512(SHA512_UNICODE_MESSAGE, HEX);
+        assertEquals("Hash is invalid", SHA512_UNICODE_DIGEST, result);
     }
 
     @Test

@@ -16,11 +16,14 @@
 
 package org.abstractj.kalium.crypto;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 
 public class Util {
 
     private static final int DEFAULT_SIZE = 32;
+
+    public final static Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
     public static byte[] prependZeros(int n, byte[] message) {
         byte[] result = new byte[n + message.length];
@@ -56,5 +59,9 @@ public class Util {
         System.arraycopy(signature, 0, result, 0, signature.length);
         System.arraycopy(message, 0, result, signature.length, message.length);
         return result;
+    }
+
+    public static byte[] toBytes(String s) {
+        return s.getBytes(DEFAULT_CHARSET);
     }
 }
